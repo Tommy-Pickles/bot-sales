@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meme Community Bots</title>
+  <link rel="icon" type="image/jpeg" href="robo-pepe.jpg">
+  <link rel="apple-touch-icon" href="robo-pepe.jpg">
+  <style>
+    :root {
+      --primary: #0071e3;
+      --bg: #ffffff;
+      --text: #111111;
+      --card-bg: #f8f8f8;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); line-height:1.6; }
+    nav { display:flex; justify-content:space-between; align-items:center; padding: 20px 60px; background: var(--bg); position: fixed; width:100%; top:0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 1000;} 
+    nav h1 { font-size:24px; display: flex; align-items: center; gap: 12px; }
+    nav h1 img { height: 40px; width: auto; border-radius: 8px; }
+    nav a { color: var(--primary); text-decoration:none; font-weight:600; }
+    .dropdown { position: relative; display: inline-block; }
+    .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--bg); min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; z-index: 1; }
+    .dropdown:hover .dropdown-content { display: block; }
+    .dropdown-content a { color: var(--text); padding: 12px 16px; text-decoration: none; display: block; }
+    .dropdown-content a:hover { background-color: var(--card-bg); }
+    main { padding: 120px 60px 60px; max-width: 1200px; margin: auto; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 40px; }
+    .card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); opacity:0; transform: translateY(30px); display: flex; flex-direction: column; }
+    .card.show { opacity:1; transform: translateY(0); transition: all 0.6s ease-out; }
+    .card h2 { font-size:22px; margin-bottom: 15px; }
+    .card p { font-size:16px; margin-bottom: 20px; }
+    .card ul { list-style: none; margin-bottom: 20px; }
+    .card ul li { margin-bottom:10px; }
+    .card .price { font-size: 24px; font-weight: bold; color: var(--primary); margin-bottom: 20px; }
+    .card .hosting-note { font-size: 14px; color: #666; margin-top: 20px; }
+    .card button { background: var(--primary); color:#fff; border:none; padding:12px 24px; border-radius:8px; font-size:16px; cursor:pointer; transition: background 0.3s ease; margin-top: auto; }
+    .card button:hover { background: #005bb5; }
+    .showcase { margin-top: 80px; }
+    .showcase h2 { font-size: 32px; margin-bottom: 40px; text-align: center; }
+    .showcase-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .showcase-card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+    .showcase-card video { width: 100%; border-radius: 8px; margin-bottom: 20px; }
+    .showcase-card h3 { font-size: 20px; margin-bottom: 15px; }
+    .showcase-card p { font-size: 16px; color: #666; }
+
+    @media (max-width: 1024px) {
+      .showcase-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px; }
+      main { padding: 120px 20px 60px; }
+      .showcase-cards { grid-template-columns: 1fr; }
+      .showcase-card { max-width: 600px; margin: 0 auto; }
+    }
+
+    .why-buy { margin-top: 80px; margin-bottom: 100px; }
+    .why-buy h2 { font-size: 32px; margin-bottom: 40px; text-align: center; }
+    .why-buy-cards { display: grid; grid-template-columns: repeat(3, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+    .why-buy-card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+    .why-buy-card h3 { font-size: 24px; margin-bottom: 20px; color: var(--primary); }
+    .why-buy-card p { font-size: 16px; line-height: 1.6; color: #444; }
+
+    @media (max-width: 1024px) {
+      .why-buy-cards { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      .why-buy-cards { grid-template-columns: minmax(280px, 1fr); }
+      .why-buy-card { max-width: 400px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h1>
+      <img src="robo-pepe.jpg" alt="Meme Community Bots Logo">
+      Meme Community Bots
+    </h1>
+    <div class="dropdown">
+      <a href="#">Example Bots ▼</a>
+      <div class="dropdown-content">
+        <a href="https://t.me/ownthedogebot" target="_blank">Own The Doge</a>
+        <!-- More bots will be added here -->
+      </div>
+    </div>
+  </nav>
+  <main>
+    <h1 style="font-size:36px; margin-bottom:40px; text-align:center;">Choose Your Bot Package</h1>
+    <div class="cards">
+      <div class="card">
+        <h2>Basic Bot</h2>
+        <p>Essential Features for Every Community</p>
+        <ul>
+          <li>/meme: One random meme or image generator</li>
+          <li>/socials - Up to 4 social media links</li>
+          <li>/chart - DEX Screener link for live chart access</li>
+          <li>/buy - DEX link</li>
+          <li>Clean, reliable, and fast</li>
+        </ul>
+        <p style="font-style: italic; margin-bottom: 20px;">Perfect for new or small communities who want to keep their Telegram fresh and fun.</p>
+        <div class="price">$300</div>
+        <a href="https://t.me/casual_bobomb" target="_blank"><button>Get Started</button></a>
+        <p class="hosting-note">* $10 per month ongoing hosting fees</p>
+      </div>
+      <div class="card">
+        <h2>Pro Bot</h2>
+        <p>Boost Engagement with More Automation</p>
+        <ul>
+          <li>Everything in Basic, plus:</li>
+          <li>/quote: Random quote or slogan generator</li>
+          <li>/meme2 & /meme3: Two extra random meme/image prompts</li>
+          <li>Up to 5 social media links</li>
+          <li>/marketcap: Fetch live market cap or price info</li>
+          <li>Two extra custom commands</li>
+        </ul>
+        <div class="price">$500</div>
+        <a href="https://t.me/casual_bobomb" target="_blank"><button>Upgrade to Pro</button></a>
+        <p class="hosting-note">* $10 per month ongoing hosting fees</p>
+      </div>
+      <div class="card">
+        <h2>Elite Bot</h2>
+        <p>Full Power, Maximum Customization</p>
+        <ul>
+          <li>Everything in Pro, plus:</li>
+          <li>/logo: Custom logo/image overlay for branding</li>
+          <li>/ai: scaffolded AI image generator</li>
+          <li>Unlimited social & promo links</li>
+          <li>Priority setup & support</li>
+          <li>Fully customizable commands</li>
+          <li>4 Extra custom commands</li>
+        </ul>
+        <div class="price">$800</div>
+        <a href="https://t.me/casual_bobomb" target="_blank"><button>Go Elite</button></a>
+        <p class="hosting-note">* $10 per month ongoing hosting fees</p>
+      </div>
+    </div>
+  </main>
+  <section class="showcase">
+    <h2>See the Bot in Action</h2>
+    <div class="showcase-cards">
+      <div class="showcase-card">
+        <video controls width="100%" playsinline>
+          <source src="demo1.mov" type="video/quicktime">
+          <source src="demo1.mov" type="video/mp4">
+          Your browser does not support the video tag. Please try using Chrome, Safari, or Firefox.
+        </video>
+        <h3>Essential Commands</h3>
+        <p>Quick access to social media links, contract addresses, and DEXScreener charts. Keep your community informed with just a simple command.</p>
+      </div>
+      <div class="showcase-card">
+        <video controls width="100%" playsinline>
+          <source src="demo2.mov" type="video/quicktime">
+          <source src="demo2.mov" type="video/mp4">
+          Your browser does not support the video tag. Please try using Chrome, Safari, or Firefox.
+        </video>
+        <h3>Content Generation</h3>
+        <p>Generate random memes, quotes, and market data on demand. Keep your community engaged with fresh content every day.</p>
+      </div>
+      <div class="showcase-card">
+        <video controls width="100%" playsinline>
+          <source src="demo3.mov" type="video/quicktime">
+          <source src="demo3.mov" type="video/mp4">
+          Your browser does not support the video tag. Please try using Chrome, Safari, or Firefox.
+        </video>
+        <h3>Logo Overlay</h3>
+        <p>Transform any image with your custom logo overlay. Perfect for branding and community engagement.</p>
+      </div>
+    </div>
+  </section>
+  <section class="why-buy">
+    <h2>Why Buy Our Bots</h2>
+    <div class="why-buy-cards">
+      <div class="why-buy-card">
+        <h3>Trustworthy</h3>
+        <p>We have a proven track record of creating reliable bots for various communities. Experience our Elite bot firsthand in the Own The Doge community. Join <a href="https://t.me/ownthedogearmy" target="_blank">@ownthedogearmy</a> and ask the team about our bot's performance and reliability. Our satisfied clients can vouch for our quality and service.</p>
+      </div>
+      <div class="why-buy-card">
+        <h3>Knowledgeable</h3>
+        <p>Our team of two experienced developers brings years of crypto expertise to every project. We understand the unique needs of crypto communities and can tailor your bot to perfectly match your project's requirements. From basic functionality to complex custom features, we've got you covered.</p>
+      </div>
+      <div class="why-buy-card">
+        <h3>Safe & Reputable</h3>
+        <p>Your bot is developed by <a href="https://x.com/0xmikeybenzo" target="_blank">0xmikeybenzo</a> (Opti Intern), a respected member of the crypto community with a proven track record. Having worked with major projects including Own the Doge, Last Network, and Pump.Science, you can trust in our experience and commitment to quality.</p>
+      </div>
+    </div>
+  </section>
+  <script>
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    cards.forEach(card => observer.observe(card));
+  </script>
+</body>
+</html>
