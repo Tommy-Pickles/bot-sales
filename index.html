@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meme Community Bots</title>
+  <title>Telegram Community Bots</title>
   <link rel="icon" type="image/jpeg" href="robo-pepe.jpg">
   <link rel="apple-touch-icon" href="robo-pepe.jpg">
   <style>
@@ -13,10 +13,20 @@
       --bg: #ffffff;
       --text: #111111;
       --card-bg: #f8f8f8;
+      --nav-bg: #f0f2f5;
     }
+
+    [data-theme="dark"] {
+      --primary: #0a84ff;
+      --bg: #1c1c1e;
+      --text: #ffffff;
+      --card-bg: #2c2c2e;
+      --nav-bg: #2c2c2e;
+    }
+
     * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); line-height:1.6; }
-    nav { display:flex; justify-content:space-between; align-items:center; padding: 20px 60px; background: var(--bg); position: fixed; width:100%; top:0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); z-index: 1000;} 
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); line-height:1.6; transition: background-color 0.3s ease, color 0.3s ease; }
+    nav { display:flex; justify-content:space-between; align-items:center; padding: 20px 60px; background: var(--nav-bg); position: fixed; width:100%; top:0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000;} 
     nav h1 { font-size:24px; display: flex; align-items: center; gap: 12px; }
     nav h1 img { height: 40px; width: auto; border-radius: 8px; }
     nav a { color: var(--primary); text-decoration:none; font-weight:600; }
@@ -27,23 +37,23 @@
     .dropdown-content a:hover { background-color: var(--card-bg); }
     main { padding: 120px 60px 60px; max-width: 1200px; margin: auto; }
     .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 40px; }
-    .card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); opacity:0; transform: translateY(30px); display: flex; flex-direction: column; }
+    .card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); opacity:0; transform: translateY(30px); display: flex; flex-direction: column; min-height: 600px; }
     .card.show { opacity:1; transform: translateY(0); transition: all 0.6s ease-out; }
     .card h2 { font-size:22px; margin-bottom: 15px; }
     .card p { font-size:16px; margin-bottom: 20px; }
-    .card ul { list-style: none; margin-bottom: 20px; }
+    .card ul { list-style: none; margin-bottom: 20px; flex-grow: 1; }
     .card ul li { margin-bottom:10px; }
-    .card .price { font-size: 24px; font-weight: bold; color: var(--primary); margin-bottom: 20px; }
-    .card .hosting-note { font-size: 14px; color: #666; margin-top: 20px; }
-    .card button { background: var(--primary); color:#fff; border:none; padding:12px 24px; border-radius:8px; font-size:16px; cursor:pointer; transition: background 0.3s ease; margin-top: auto; }
+    .card .price { font-size: 24px; font-weight: bold; color: var(--primary); margin: 20px 0; }
+    .card .hosting-note { font-size: 14px; color: #666; margin-top: 10px; }
+    .card button { background: var(--primary); color:#fff; border:none; padding:12px 24px; border-radius:8px; font-size:16px; cursor:pointer; transition: background 0.3s ease; width: 100%; }
     .card button:hover { background: #005bb5; }
     .showcase { margin-top: 80px; }
     .showcase h2 { font-size: 32px; margin-bottom: 40px; text-align: center; }
     .showcase-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
     .showcase-card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
     .showcase-card video { width: 100%; border-radius: 8px; margin-bottom: 20px; }
-    .showcase-card h3 { font-size: 20px; margin-bottom: 15px; }
-    .showcase-card p { font-size: 16px; color: #666; }
+    .showcase-card h3 { font-size: 20px; margin-bottom: 15px; color: var(--text); }
+    .showcase-card p { font-size: 16px; color: var(--text); }
 
     @media (max-width: 1024px) {
       .showcase-cards { grid-template-columns: repeat(2, 1fr); }
@@ -61,7 +71,9 @@
     .why-buy-cards { display: grid; grid-template-columns: repeat(3, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
     .why-buy-card { background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
     .why-buy-card h3 { font-size: 24px; margin-bottom: 20px; color: var(--primary); }
-    .why-buy-card p { font-size: 16px; line-height: 1.6; color: #444; }
+    .why-buy-card p { font-size: 16px; line-height: 1.6; color: var(--text); }
+    .why-buy-card a { color: var(--primary); text-decoration: none; }
+    .why-buy-card a:hover { text-decoration: underline; }
 
     @media (max-width: 1024px) {
       .why-buy-cards { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
@@ -71,24 +83,53 @@
       .why-buy-cards { grid-template-columns: minmax(280px, 1fr); }
       .why-buy-card { max-width: 400px; margin: 0 auto; }
     }
+
+    .theme-toggle { background: none; border: none; color: var(--text); cursor: pointer; font-size: 20px; padding: 5px; }
+    .theme-toggle:hover { color: var(--primary); }
+
+    .scroll-indicator {
+      text-align: center;
+      margin: 40px 0;
+      color: var(--text);
+      opacity: 0.7;
+      animation: bounce 2s infinite;
+    }
+    .scroll-indicator p {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
   </style>
 </head>
 <body>
   <nav>
     <h1>
-      <img src="robo-pepe.jpg" alt="Meme Community Bots Logo">
-      Meme Community Bots
+      <img src="robo-pepe.jpg" alt="Telegram Community Bots Logo">
+      Telegram Community Bots
     </h1>
-    <div class="dropdown">
-      <a href="#">Example Bots ▼</a>
-      <div class="dropdown-content">
-        <a href="https://t.me/ownthedogebot" target="_blank">Own The Doge</a>
-        <!-- More bots will be added here -->
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      <div class="dropdown">
+        <a href="#">Example Bots ▼</a>
+        <div class="dropdown-content">
+          <a href="https://t.me/ownthedogebot" target="_blank">Own The Doge</a>
+          <!-- More bots will be added here -->
+        </div>
       </div>
     </div>
   </nav>
   <main>
-    <h1 style="font-size:36px; margin-bottom:40px; text-align:center;">Choose Your Bot Package</h1>
+    <h1 style="font-size:36px; margin-bottom:40px; text-align:center;">Choose Your Package</h1>
     <div class="cards">
       <div class="card">
         <h2>Basic Bot</h2>
@@ -137,6 +178,10 @@
         <p class="hosting-note">* $10 per month ongoing hosting fees</p>
       </div>
     </div>
+    <div class="scroll-indicator">
+      <p>See more features below</p>
+      <div style="font-size: 24px;">↓</div>
+    </div>
   </main>
   <section class="showcase">
     <h2>See the Bot in Action</h2>
@@ -166,7 +211,7 @@
           Your browser does not support the video tag. Please try using Chrome, Safari, or Firefox.
         </video>
         <h3>Logo Overlay</h3>
-        <p>Transform any image with your custom logo overlay. Perfect for branding and community engagement.</p>
+        <p>Transform any image with your custom logo overlay. Add your brand's logo at the bottom of any image. Perfect for branding and community engagement.</p>
       </div>
     </div>
   </section>
@@ -179,11 +224,11 @@
       </div>
       <div class="why-buy-card">
         <h3>Knowledgeable</h3>
-        <p>Our team of two experienced developers brings years of crypto expertise to every project. We understand the unique needs of crypto communities and can tailor your bot to perfectly match your project's requirements. From basic functionality to complex custom features, we've got you covered.</p>
+        <p>Our team of two experienced developers brings years of crypto expertise to every project. We understand the unique needs of crypto communities and can tailor your bot to perfectly match your project's requirements. From basic functionality to complex custom features, to the bottom of the degen barrel, we've got you covered.</p>
       </div>
       <div class="why-buy-card">
         <h3>Safe & Reputable</h3>
-        <p>Your bot is developed by <a href="https://x.com/0xmikeybenzo" target="_blank">0xmikeybenzo</a> (Opti Intern), a respected member of the crypto community with a proven track record. Having worked with major projects including Own the Doge, Last Network, and Pump.Science, you can trust in our experience and commitment to quality.</p>
+        <p>Your bot is developed by <a href="https://x.com/0xmikeybenzo" target="_blank">0xmikeybenzo</a> (Opti Intern), a respected member of the crypto community with a proven track record. Having worked with major projects including <a href="https://x.com/ownthedoge" target="_blank">Own the Doge</a>, Last Network, and Pump.Science, you can trust in our experience and commitment to quality.</p>
       </div>
     </div>
   </section>
@@ -198,6 +243,29 @@
       });
     }, { threshold: 0.2 });
     cards.forEach(card => observer.observe(card));
+
+    // Theme toggle functionality
+    function toggleTheme() {
+      const body = document.body;
+      const themeToggle = document.querySelector('.theme-toggle');
+      
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      document.querySelector('.theme-toggle').textContent = '☀️';
+    }
   </script>
 </body>
 </html>
