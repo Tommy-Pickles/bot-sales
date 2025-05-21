@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telegram Community Bots</title>
-  <link rel="icon" type="image/jpeg" href="robo-pepe.jpg">
-  <link rel="apple-touch-icon" href="robo-pepe.jpg">
+  <title>Tele Bots</title>
+  <link rel="icon" type="image/png" href="tb-logo.png">
+  <link rel="apple-touch-icon" href="tb-logo.png">
   <style>
     :root {
       --primary: #0071e3;
@@ -27,8 +27,8 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); line-height:1.6; transition: background-color 0.3s ease, color 0.3s ease; }
     nav { display:flex; justify-content:space-between; align-items:center; padding: 20px 60px; background: var(--nav-bg); position: fixed; width:100%; top:0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000;} 
-    nav h1 { font-size:24px; display: flex; align-items: center; gap: 12px; }
-    nav h1 img { height: 40px; width: auto; border-radius: 8px; }
+    nav h1 { font-size:32px; display: flex; align-items: center; gap: 12px; }
+    nav h1 img { height: 60px; width: auto; border-radius: 8px; }
     nav a { color: var(--primary); text-decoration:none; font-weight:600; }
     .dropdown { position: relative; display: inline-block; }
     .dropdown-content { display: none; position: absolute; right: 0; background-color: var(--bg); min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; z-index: 1; }
@@ -93,6 +93,11 @@
       color: var(--text);
       opacity: 0.7;
       animation: bounce 2s infinite;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .scroll-indicator:hover {
+      opacity: 1;
     }
     .scroll-indicator p {
       margin-bottom: 10px;
@@ -114,8 +119,8 @@
 <body>
   <nav>
     <h1>
-      <img src="robo-pepe.jpg" alt="Telegram Community Bots Logo">
-      Telegram Community Bots
+      <img src="tb-logo.png" alt="Tele Bots Logo">
+      Tele Bots
     </h1>
     <div style="display: flex; align-items: center; gap: 20px;">
       <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
@@ -178,7 +183,7 @@
         <p class="hosting-note">* $10 per month ongoing hosting fees</p>
       </div>
     </div>
-    <div class="scroll-indicator">
+    <div class="scroll-indicator" onclick="scrollToShowcase()">
       <p>See more features below</p>
       <div style="font-size: 24px;">↓</div>
     </div>
@@ -265,6 +270,12 @@
     if (savedTheme === 'dark') {
       document.body.setAttribute('data-theme', 'dark');
       document.querySelector('.theme-toggle').textContent = '☀️';
+    }
+
+    // Smooth scroll to showcase section
+    function scrollToShowcase() {
+      const showcase = document.querySelector('.showcase');
+      showcase.scrollIntoView({ behavior: 'smooth' });
     }
   </script>
 </body>
