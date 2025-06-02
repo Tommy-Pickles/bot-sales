@@ -60,10 +60,23 @@
     }
 
     @media (max-width: 768px) {
-      nav { padding: 20px; }
-      main { padding: 120px 20px 60px; }
-      .showcase-cards { grid-template-columns: 1fr; }
-      .showcase-card { max-width: 600px; margin: 0 auto; }
+      nav { padding: 10px; }
+      nav h1 { font-size: 20px; }
+      nav h1 img { height: 36px; }
+      main { padding: 90px 5px 30px; }
+      h1 { font-size: 24px !important; }
+      .cards { gap: 16px; }
+      .card { padding: 14px; min-height: 380px; }
+      .card h2 { font-size: 16px; }
+      .card p, .card ul li, .card .price, .card .hosting-note { font-size: 13px; }
+      .card button { font-size: 14px; padding: 8px 12px; }
+      .showcase h2, .why-buy h2 { font-size: 20px; }
+      .showcase-card, .why-buy-card { padding: 14px; }
+      .showcase-card h3, .why-buy-card h3 { font-size: 15px; }
+      .showcase-card p, .why-buy-card p { font-size: 13px; }
+      .showcase-card { max-width: 100%; }
+      .why-buy-card { max-width: 100%; }
+      .dropdown-content { min-width: 120px; }
     }
 
     .why-buy { margin-top: 80px; margin-bottom: 100px; }
@@ -128,6 +141,7 @@
         <a href="#">Example Bots ▼</a>
         <div class="dropdown-content">
           <a href="https://t.me/ownthedogebot" target="_blank">Own The Doge</a>
+          <a href="https://t.me/basic_telebot" target="_blank">@basic_telebot</a>
           <!-- More bots will be added here -->
         </div>
       </div>
